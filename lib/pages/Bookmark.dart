@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:travel_app/pages/Bookmark.dart';
-import 'package:travel_app/pages/Notification.dart';
-// import 'package:travel_app/widgets/custom_icon_button.dart';
-// import 'package:travel_app/widgets/location_card.dart';
-import 'package:travel_app/widgets/nearby_places.dart';
-import 'package:travel_app/widgets/recommended_places.dart';
-import 'package:travel_app/widgets/tourist_places.dart';
 import 'login_page.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+import 'home_page.dart';
+import 'package:ionicons/ionicons.dart';
+class bookmark extends StatefulWidget {
+  const bookmark({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<bookmark> createState() => _bookmarkState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+class _bookmarkState extends State<bookmark> {
+    int _currentIndex = 1;
   bool _isSearchVisible = false;
   final TextEditingController _searchController = TextEditingController();
-
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -41,15 +33,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void tonotification() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const notification(),
-      ),
-    );
-  }
-
   void tologin() {
     Navigator.pushReplacement(
       context,
@@ -58,8 +41,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  void tobookmark() {
+    void tobookmark() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -76,12 +58,10 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+            appBar: AppBar(
         toolbarHeight: 80,
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 0, 81, 106),
@@ -142,91 +122,15 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(left: 8.0, right: 12),
             child: IconButton(
               icon: const Icon(Ionicons.notifications_outline),
-              onPressed: tonotification,
+              onPressed: () {
+                // Add your notification button logic here
+              },
             ),
           ),
         ],
       ),
-      body: Column(
-        children: [
-          if (_isSearchVisible)
-            Container(
-              color: const Color(0xFF37c4ee),
-              child: Padding(
-                padding: const EdgeInsets.all(14),
-                child: Container(
-                  color: Colors.white,
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Ionicons.search_outline),
-                      hintText: 'Search...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          Expanded(
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.all(14),
-              children: [
-                // const LocationCard(),
-                // const SizedBox(height: 15),
-                const TouristPlaces(),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Popular Nearby",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 0, 50, 66),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22),
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "View All",
-                          style: TextStyle(
-                            fontFamily: 'Cabin',
-                            color: Colors.black54,
-                          ),
-                        ))
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const RecommendedPlaces(),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Recommendation",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 0, 50, 66),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22),
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text("View All",
-                            style: TextStyle(
-                              fontFamily: 'Cabin',
-                              color: Colors.black54,
-                            )))
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const NearbyPlaces(),
-              ],
-            ),
-          ),
-        ],
+      body: Center(
+        child: Text('no bookmarks added'),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 0, 81, 106),
